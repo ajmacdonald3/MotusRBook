@@ -1,9 +1,9 @@
 # Appendix - `motus` - Summary and plotting functions {#appendixC}
 
-```{r tidyr10, echo = FALSE, message = FALSE, warning = FALSE}
+```{r tidyr11, echo = FALSE, message = FALSE, warning = FALSE}
 
 library(knitr)
-opts_chunk$set(tidy.opts=list(width.cutoff=50), tidy = FALSE)
+opts_chunk$set(tidy.opts=list(width.cutoff=50), tidy = FALSE, fig.width = 7, fig.height = 5)
 
 ```
 

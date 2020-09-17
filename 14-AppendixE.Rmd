@@ -1,6 +1,6 @@
 # Bird's Eye View of Motus Data #
 
-This document has been adapted from a version written by John Brzustowsky in 2017. It provides an overview 
+This document has been adapted from a version written by John Brzustowski in 2017. It provides an overview 
 of the fundamentals of how Motus data processing works. The document has been adapted to incorporate more recent 
 developments, particularly the addition of new digital tags and base stations manufactured by Cellular 
 Tracking Technologies (CTT), who took over the development from Cornell University.
