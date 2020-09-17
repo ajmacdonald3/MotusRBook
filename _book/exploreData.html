@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Exploring data with the Motus R package | Motus R Book</title>
   <meta name="description" content="6 Exploring data with the Motus R package | Motus R Book" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Exploring data with the Motus R package | Motus R Book" />
   <meta property="og:type" content="book" />
@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -201,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="dataCleaning.html"><a href="dataCleaning.html"><i class="fa fa-check"></i><b>5</b> Data Cleaning</a><ul>
 <li class="chapter" data-level="5.1" data-path="dataCleaning.html"><a href="dataCleaning.html#loadDetectionsCleaning"><i class="fa fa-check"></i><b>5.1</b> Load required packages</a></li>
 <li class="chapter" data-level="5.2" data-path="dataCleaning.html"><a href="dataCleaning.html#load-detections-data"><i class="fa fa-check"></i><b>5.2</b> Load detections data</a></li>
-<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assess-tag-detections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
+<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assessTagDetections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
 <li class="chapter" data-level="5.4" data-path="dataCleaning.html"><a href="dataCleaning.html#preliminary-filtering"><i class="fa fa-check"></i><b>5.4</b> Preliminary filtering</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="dataCleaning.html"><a href="dataCleaning.html#understanding-the-motusfilter"><i class="fa fa-check"></i><b>5.4.1</b> Understanding the <code>motusFilter</code></a></li>
 <li class="chapter" data-level="5.4.2" data-path="dataCleaning.html"><a href="dataCleaning.html#how-the-motusfilter-is-generated"><i class="fa fa-check"></i><b>5.4.2</b> How the <code>motusFilter</code> is generated</a></li>
@@ -245,6 +246,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="vanishingBearings.html"><a href="vanishingBearings.html#vanishingLitCited"><i class="fa fa-check"></i><b>7.3</b> Literature Cited</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="advancedModelling.html"><a href="advancedModelling.html"><i class="fa fa-check"></i><b>8</b> Advanced modelling and analysis</a></li>
+<li class="chapter" data-level="9" data-path="falsePositives.html"><a href="falsePositives.html"><i class="fa fa-check"></i><b>9</b> A tool to identify probable false positive detections</a><ul>
+<li class="chapter" data-level="9.1" data-path="falsePositives.html"><a href="falsePositives.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="falsePositives.html"><a href="falsePositives.html#step-1-classification-of-detections"><i class="fa fa-check"></i><b>9.2</b> Step 1 – Classification of detections</a></li>
+<li class="chapter" data-level="9.3" data-path="falsePositives.html"><a href="falsePositives.html#step-2-identification-of-potential-diagnostic-parameters"><i class="fa fa-check"></i><b>9.3</b> Step 2 – Identification of potential diagnostic parameters</a></li>
+<li class="chapter" data-level="9.4" data-path="falsePositives.html"><a href="falsePositives.html#step-3-prediction-of-the-probability-of-being-a-false-positive"><i class="fa fa-check"></i><b>9.4</b> Step 3 – Prediction of the probability of being a false positive</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Appendix - <code>alltags</code> and <code>alltagsGPS</code> structure</a></li>
 <li class="chapter" data-level="B" data-path="appendixB.html"><a href="appendixB.html"><i class="fa fa-check"></i><b>B</b> Appendix - Troubleshooting</a><ul>
@@ -464,27 +471,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb181-4"><a href="exploreData.html#cb181-4"></a>         recvDeployLat, recvDeployLon) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb181-5"><a href="exploreData.html#cb181-5"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
 <span id="cb181-6"><a href="exploreData.html#cb181-6"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
-<pre><code>##        ts              motusTagID        runLen        speciesEN           tagDepLat       tagDepLon      recvDeployLat    recvDeployLon    
-##  Min.   :1.438e+09   Min.   :10811   Min.   :   2.0   Length:108826      Min.   :11.12   Min.   :-80.69   Min.   :-42.50   Min.   :-143.68  
-##  1st Qu.:1.476e+09   1st Qu.:22897   1st Qu.:  30.0   Class :character   1st Qu.:50.19   1st Qu.:-63.75   1st Qu.: 50.20   1st Qu.: -63.75  
-##  Median :1.477e+09   Median :22905   Median : 122.0   Mode  :character   Median :50.19   Median :-63.75   Median : 50.20   Median : -63.75  
-##  Mean   :1.476e+09   Mean   :22660   Mean   : 355.9                      Mean   :50.14   Mean   :-65.77   Mean   : 49.05   Mean   : -65.64  
-##  3rd Qu.:1.477e+09   3rd Qu.:23316   3rd Qu.: 404.0                      3rd Qu.:50.19   3rd Qu.:-63.75   3rd Qu.: 50.20   3rd Qu.: -63.75  
-##  Max.   :1.498e+09   Max.   :24303   Max.   :2474.0                      Max.   :51.80   Max.   :-63.75   Max.   : 62.89   Max.   : -60.02  
-##                                                                          NA&#39;s   :2025    NA&#39;s   :2025     NA&#39;s   :173      NA&#39;s   :173</code></pre>
+<pre><code>##        ts              motusTagID        runLen        speciesEN        
+##  Min.   :1.438e+09   Min.   :10811   Min.   :   2.0   Length:108826     
+##  1st Qu.:1.476e+09   1st Qu.:22897   1st Qu.:  30.0   Class :character  
+##  Median :1.477e+09   Median :22905   Median : 122.0   Mode  :character  
+##  Mean   :1.476e+09   Mean   :22660   Mean   : 355.9                     
+##  3rd Qu.:1.477e+09   3rd Qu.:23316   3rd Qu.: 404.0                     
+##  Max.   :1.498e+09   Max.   :24303   Max.   :2474.0                     
+##                                                                         
+##    tagDepLat       tagDepLon      recvDeployLat    recvDeployLon    
+##  Min.   :11.12   Min.   :-80.69   Min.   :-42.50   Min.   :-143.68  
+##  1st Qu.:50.19   1st Qu.:-63.75   1st Qu.: 50.20   1st Qu.: -63.75  
+##  Median :50.19   Median :-63.75   Median : 50.20   Median : -63.75  
+##  Mean   :50.14   Mean   :-65.77   Mean   : 49.05   Mean   : -65.64  
+##  3rd Qu.:50.19   3rd Qu.:-63.75   3rd Qu.: 50.20   3rd Qu.: -63.75  
+##  Max.   :51.80   Max.   :-63.75   Max.   : 62.89   Max.   : -60.02  
+##  NA&#39;s   :2025    NA&#39;s   :2025     NA&#39;s   :173      NA&#39;s   :173</code></pre>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="exploreData.html#cb183-1"></a><span class="co"># same summary for the filtered sql data</span></span>
 <span id="cb183-2"><a href="exploreData.html#cb183-2"></a>df.alltags.sub <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb183-3"><a href="exploreData.html#cb183-3"></a><span class="st">  </span><span class="kw">select</span>(ts, motusTagID, runLen, speciesEN, tagDepLat, tagDepLon, </span>
 <span id="cb183-4"><a href="exploreData.html#cb183-4"></a>         recvLat, recvLon) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb183-5"><a href="exploreData.html#cb183-5"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
-<pre><code>##        ts                        motusTagID        runLen        speciesEN           tagDepLat       tagDepLon         recvLat         recvLon      
-##  Min.   :2015-08-03 06:37:11   Min.   :16011   Min.   :   4.0   Length:48133       Min.   :50.19   Min.   :-80.69   Min.   :37.10   Min.   :-80.69  
-##  1st Qu.:2016-10-06 19:17:36   1st Qu.:22897   1st Qu.:  27.0   Class :character   1st Qu.:50.19   1st Qu.:-63.75   1st Qu.:50.20   1st Qu.:-63.75  
-##  Median :2016-10-09 21:48:11   Median :22897   Median :  97.0   Mode  :character   Median :50.19   Median :-63.75   Median :50.20   Median :-63.75  
-##  Mean   :2016-09-05 10:37:42   Mean   :22267   Mean   : 235.1                      Mean   :50.34   Mean   :-65.56   Mean   :50.05   Mean   :-65.26  
-##  3rd Qu.:2016-10-19 10:37:42   3rd Qu.:22897   3rd Qu.: 287.0                      3rd Qu.:50.19   3rd Qu.:-63.75   3rd Qu.:50.20   3rd Qu.:-63.75  
-##  Max.   :2017-04-20 22:33:19   Max.   :23316   Max.   :1371.0                      Max.   :51.80   Max.   :-63.75   Max.   :51.82   Max.   :-62.99  
-##                                                                                                                     NA&#39;s   :164     NA&#39;s   :164</code></pre>
+<pre><code>##        ts                        motusTagID        runLen      
+##  Min.   :2015-08-03 06:37:11   Min.   :16011   Min.   :   4.0  
+##  1st Qu.:2016-10-06 19:17:36   1st Qu.:22897   1st Qu.:  27.0  
+##  Median :2016-10-09 21:48:11   Median :22897   Median :  97.0  
+##  Mean   :2016-09-05 10:37:42   Mean   :22267   Mean   : 235.1  
+##  3rd Qu.:2016-10-19 10:37:42   3rd Qu.:22897   3rd Qu.: 287.0  
+##  Max.   :2017-04-20 22:33:19   Max.   :23316   Max.   :1371.0  
+##                                                                
+##   speciesEN           tagDepLat       tagDepLon         recvLat     
+##  Length:48133       Min.   :50.19   Min.   :-80.69   Min.   :37.10  
+##  Class :character   1st Qu.:50.19   1st Qu.:-63.75   1st Qu.:50.20  
+##  Mode  :character   Median :50.19   Median :-63.75   Median :50.20  
+##                     Mean   :50.34   Mean   :-65.56   Mean   :50.05  
+##                     3rd Qu.:50.19   3rd Qu.:-63.75   3rd Qu.:50.20  
+##                     Max.   :51.80   Max.   :-63.75   Max.   :51.82  
+##                                                      NA&#39;s   :164    
+##     recvLon      
+##  Min.   :-80.69  
+##  1st Qu.:-63.75  
+##  Median :-63.75  
+##  Mean   :-65.26  
+##  3rd Qu.:-63.75  
+##  Max.   :-62.99  
+##  NA&#39;s   :164</code></pre>
 <p>The <code>dplyr</code> package allows you to easily summarize data by group, manipulate variables, or create new variables based on your data.</p>
 <p>We can manipulate existing variables or create new ones with <code>dplyr</code>’s <code>mutate()</code> function, here we’ll convert ts to a POSIXct format, then make a new variable for year and day of year (doy).</p>
 <p>We’ll also remove the set of points with missing receiver latitude and longitudes. These may be useful in some contexts (for example if the approximate location of the receiver is known) but can cause warnings or errors when plotting.</p>
@@ -495,34 +526,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb185-5"><a href="exploreData.html#cb185-5"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(recvLat))</span>
 <span id="cb185-6"><a href="exploreData.html#cb185-6"></a></span>
 <span id="cb185-7"><a href="exploreData.html#cb185-7"></a><span class="kw">head</span>(df.alltags.sub)</span></code></pre></div>
-<pre><code>##    hitID runID batchID                  ts tsCorrected sig sigsd freq freqsd motusTagID ambigID port runLen tagProjID mfgID tagType tagModel tagLifespan  tagBI
-## 1  45107  8886      53 2015-10-26 11:19:49  1445858390  52     0    4      0      16047      NA    3      5       176   378      ID NTQB-3-2          NA 9.6971
-## 2  45108  8886      53 2015-10-26 11:20:28  1445858429  54     0    4      0      16047      NA    3      5       176   378      ID NTQB-3-2          NA 9.6971
-## 3  45109  8886      53 2015-10-26 11:21:17  1445858477  55     0    4      0      16047      NA    3      5       176   378      ID NTQB-3-2          NA 9.6971
-## 4  45110  8886      53 2015-10-26 11:21:55  1445858516  52     0    4      0      16047      NA    3      5       176   378      ID NTQB-3-2          NA 9.6971
-## 5  45111  8886      53 2015-10-26 11:22:44  1445858564  49     0    4      0      16047      NA    3      5       176   378      ID NTQB-3-2          NA 9.6971
-## 6 199885 23305      64 2015-10-26 11:12:04  1445857924  33     0    4      0      16047      NA    1     11       176   378      ID NTQB-3-2          NA 9.6971
-##   pulseLen tagDeployID speciesID      tagDeployStart        tagDeployEnd tagDepLat tagDepLon tagDepAlt recvDeployID      recv recvDeployName isRecvMobile recvProjID
-## 1      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00   51.4839    -80.45        NA         2510 Lotek-159      Shelburne            0         74
-## 2      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00   51.4839    -80.45        NA         2510 Lotek-159      Shelburne            0         74
-## 3      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00   51.4839    -80.45        NA         2510 Lotek-159      Shelburne            0         74
-## 4      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00   51.4839    -80.45        NA         2510 Lotek-159      Shelburne            0         74
-## 5      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00   51.4839    -80.45        NA         2510 Lotek-159      Shelburne            0         74
-## 6      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00   51.4839    -80.45        NA         2512 Lotek-164  BennettMeadow            0         74
-##   recvUtcOffset antType antBearing antHeight speciesEN          speciesFR       speciesSci tagProjName recvProjName gpsAlt filterID probability  recvLat   recvLon
-## 1            NA  yagi-9        127        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657
-## 2            NA  yagi-9        127        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657
-## 3            NA  yagi-9        127        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657
-## 4            NA  yagi-9        127        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657
-## 5            NA  yagi-9        127        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657
-## 6            NA  yagi-9        243        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData         &lt;NA&gt;     NA       NA           1 42.68067 -72.47392
-##   year doy
-## 1 2015 299
-## 2 2015 299
-## 3 2015 299
-## 4 2015 299
-## 5 2015 299
-## 6 2015 299</code></pre>
+<pre><code>##    hitID runID batchID                  ts tsCorrected sig sigsd freq freqsd
+## 1  45107  8886      53 2015-10-26 11:19:49  1445858390  52     0    4      0
+## 2  45108  8886      53 2015-10-26 11:20:28  1445858429  54     0    4      0
+## 3  45109  8886      53 2015-10-26 11:21:17  1445858477  55     0    4      0
+## 4  45110  8886      53 2015-10-26 11:21:55  1445858516  52     0    4      0
+## 5  45111  8886      53 2015-10-26 11:22:44  1445858564  49     0    4      0
+## 6 199885 23305      64 2015-10-26 11:12:04  1445857924  33     0    4      0
+##   motusTagID ambigID port runLen tagProjID mfgID tagType tagModel tagLifespan
+## 1      16047      NA    3      5       176   378      ID NTQB-3-2          NA
+## 2      16047      NA    3      5       176   378      ID NTQB-3-2          NA
+## 3      16047      NA    3      5       176   378      ID NTQB-3-2          NA
+## 4      16047      NA    3      5       176   378      ID NTQB-3-2          NA
+## 5      16047      NA    3      5       176   378      ID NTQB-3-2          NA
+## 6      16047      NA    1     11       176   378      ID NTQB-3-2          NA
+##    tagBI pulseLen tagDeployID speciesID      tagDeployStart        tagDeployEnd
+## 1 9.6971      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00
+## 2 9.6971      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00
+## 3 9.6971      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00
+## 4 9.6971      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00
+## 5 9.6971      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00
+## 6 9.6971      2.5        1839      4670 2015-09-10 18:00:00 2016-03-10 18:00:00
+##   tagDepLat tagDepLon tagDepAlt tagDeployTest recvDeployID      recv
+## 1   51.4839    -80.45        NA            NA         2510 Lotek-159
+## 2   51.4839    -80.45        NA            NA         2510 Lotek-159
+## 3   51.4839    -80.45        NA            NA         2510 Lotek-159
+## 4   51.4839    -80.45        NA            NA         2510 Lotek-159
+## 5   51.4839    -80.45        NA            NA         2510 Lotek-159
+## 6   51.4839    -80.45        NA            NA         2512 Lotek-164
+##   recvDeployName isRecvMobile recvProjID recvUtcOffset antType antBearing
+## 1      Shelburne            0         74            NA  yagi-9        127
+## 2      Shelburne            0         74            NA  yagi-9        127
+## 3      Shelburne            0         74            NA  yagi-9        127
+## 4      Shelburne            0         74            NA  yagi-9        127
+## 5      Shelburne            0         74            NA  yagi-9        127
+## 6  BennettMeadow            0         74            NA  yagi-9        243
+##   antHeight speciesEN          speciesFR       speciesSci tagProjName
+## 1        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData
+## 2        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData
+## 3        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData
+## 4        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData
+## 5        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData
+## 6        NA  Red Knot Bécasseau maubèche Calidris canutus  SampleData
+##   recvProjName gpsAlt filterID probability  recvLat   recvLon year doy
+## 1         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657 2015 299
+## 2         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657 2015 299
+## 3         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657 2015 299
+## 4         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657 2015 299
+## 5         &lt;NA&gt;     NA       NA           1 42.60699 -72.71657 2015 299
+## 6         &lt;NA&gt;     NA       NA           1 42.68067 -72.47392 2015 299</code></pre>
 <p>We can also summarize information by group, in this case <code>motusTagID</code>, and apply various functions to these groups such as getting the total number of detections (n) for each tag, the number of receivers each tag was detected on, the first and last detection date, and the total number of days there was at least one detection:</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="exploreData.html#cb187-1"></a>tagSummary &lt;-<span class="st"> </span>df.alltags.sub <span class="op">%&gt;%</span></span>
 <span id="cb187-2"><a href="exploreData.html#cb187-2"></a><span class="st">  </span><span class="kw">group_by</span>(motusTagID) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -554,14 +606,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="exploreData.html#cb193-1"></a><span class="kw">head</span>(tagRecvSummary)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 7
 ## # Groups:   motusTagID [2]
-##   motusTagID recvDeployName  nDet nRecv tsMin               tsMax               totDay
-##        &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;               &lt;int&gt;
-## 1      16011 North Bluff      116     1 2015-08-03 06:37:11 2015-08-05 20:41:12      3
-## 2      16035 Brier2            38     1 2015-09-02 14:03:19 2015-09-02 14:06:09      1
-## 3      16035 D&#39;Estimauville    32     1 2015-09-02 07:58:43 2015-09-02 08:04:24      1
-## 4      16035 Netitishi        274     1 2015-08-14 17:53:49 2015-09-01 21:35:32      5
-## 5      16035 Southwest Head    65     1 2015-09-02 13:06:13 2015-09-02 13:14:39      1
-## 6      16035 Swallowtail        6     1 2015-09-02 13:21:27 2015-09-02 13:22:22      1</code></pre>
+##   motusTagID recvDeployName  nDet nRecv tsMin               tsMax              
+##        &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+## 1      16011 North Bluff      116     1 2015-08-03 06:37:11 2015-08-05 20:41:12
+## 2      16035 Brier2            38     1 2015-09-02 14:03:19 2015-09-02 14:06:09
+## 3      16035 D&#39;Estimauville    32     1 2015-09-02 07:58:43 2015-09-02 08:04:24
+## 4      16035 Netitishi        274     1 2015-08-14 17:53:49 2015-09-01 21:35:32
+## 5      16035 Southwest Head    65     1 2015-09-02 13:06:13 2015-09-02 13:14:39
+## 6      16035 Swallowtail        6     1 2015-09-02 13:21:27 2015-09-02 13:22:22
+## # ... with 1 more variable: totDay &lt;int&gt;</code></pre>
 </div>
 <div id="dataPlotting" class="section level2">
 <h2><span class="header-section-number">6.4</span> Plotting your data</h2>

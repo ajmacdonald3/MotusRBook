@@ -62,7 +62,7 @@ proj.num <- 176
 sql.motus <- tagme(proj.num, update = TRUE, dir = "./data/")
 ```
 
-## Assess tag detections
+## Assess tag detections {#assessTagDetections}
 
 First, determine which project tags have detections. There are several reasons why deployed tags might not be detected, including:
 

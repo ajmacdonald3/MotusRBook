@@ -2,7 +2,7 @@
 
 # Appendix - `alltags` and `alltagsGPS` structure {#appendixA}
 
-```{r tidyr8, echo = FALSE, message = FALSE, warning = FALSE}
+```{r tidyr9, echo = FALSE, message = FALSE, warning = FALSE}
 
 library(knitr)
 opts_chunk$set(tidy.opts=list(width.cutoff=50), tidy = FALSE)

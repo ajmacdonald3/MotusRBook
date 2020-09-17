@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Data Cleaning | Motus R Book</title>
   <meta name="description" content="5 Data Cleaning | Motus R Book" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Data Cleaning | Motus R Book" />
   <meta property="og:type" content="book" />
@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -201,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="dataCleaning.html"><a href="dataCleaning.html"><i class="fa fa-check"></i><b>5</b> Data Cleaning</a><ul>
 <li class="chapter" data-level="5.1" data-path="dataCleaning.html"><a href="dataCleaning.html#loadDetectionsCleaning"><i class="fa fa-check"></i><b>5.1</b> Load required packages</a></li>
 <li class="chapter" data-level="5.2" data-path="dataCleaning.html"><a href="dataCleaning.html#load-detections-data"><i class="fa fa-check"></i><b>5.2</b> Load detections data</a></li>
-<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assess-tag-detections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
+<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assessTagDetections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
 <li class="chapter" data-level="5.4" data-path="dataCleaning.html"><a href="dataCleaning.html#preliminary-filtering"><i class="fa fa-check"></i><b>5.4</b> Preliminary filtering</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="dataCleaning.html"><a href="dataCleaning.html#understanding-the-motusfilter"><i class="fa fa-check"></i><b>5.4.1</b> Understanding the <code>motusFilter</code></a></li>
 <li class="chapter" data-level="5.4.2" data-path="dataCleaning.html"><a href="dataCleaning.html#how-the-motusfilter-is-generated"><i class="fa fa-check"></i><b>5.4.2</b> How the <code>motusFilter</code> is generated</a></li>
@@ -245,6 +246,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="vanishingBearings.html"><a href="vanishingBearings.html#vanishingLitCited"><i class="fa fa-check"></i><b>7.3</b> Literature Cited</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="advancedModelling.html"><a href="advancedModelling.html"><i class="fa fa-check"></i><b>8</b> Advanced modelling and analysis</a></li>
+<li class="chapter" data-level="9" data-path="falsePositives.html"><a href="falsePositives.html"><i class="fa fa-check"></i><b>9</b> A tool to identify probable false positive detections</a><ul>
+<li class="chapter" data-level="9.1" data-path="falsePositives.html"><a href="falsePositives.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="falsePositives.html"><a href="falsePositives.html#step-1-classification-of-detections"><i class="fa fa-check"></i><b>9.2</b> Step 1 – Classification of detections</a></li>
+<li class="chapter" data-level="9.3" data-path="falsePositives.html"><a href="falsePositives.html#step-2-identification-of-potential-diagnostic-parameters"><i class="fa fa-check"></i><b>9.3</b> Step 2 – Identification of potential diagnostic parameters</a></li>
+<li class="chapter" data-level="9.4" data-path="falsePositives.html"><a href="falsePositives.html#step-3-prediction-of-the-probability-of-being-a-false-positive"><i class="fa fa-check"></i><b>9.4</b> Step 3 – Prediction of the probability of being a false positive</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Appendix - <code>alltags</code> and <code>alltagsGPS</code> structure</a></li>
 <li class="chapter" data-level="B" data-path="appendixB.html"><a href="appendixB.html"><i class="fa fa-check"></i><b>B</b> Appendix - Troubleshooting</a><ul>
@@ -428,7 +435,7 @@ A run is a group of consecutive detections of a tag detected on a single antenna
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="dataCleaning.html#cb96-1"></a>proj.num &lt;-<span class="st"> </span><span class="dv">176</span></span>
 <span id="cb96-2"><a href="dataCleaning.html#cb96-2"></a>sql.motus &lt;-<span class="st"> </span><span class="kw">tagme</span>(proj.num, <span class="dt">update =</span> <span class="ot">TRUE</span>, <span class="dt">dir =</span> <span class="st">&quot;./data/&quot;</span>)</span></code></pre></div>
 </div>
-<div id="assess-tag-detections" class="section level2">
+<div id="assessTagDetections" class="section level2">
 <h2><span class="header-section-number">5.3</span> Assess tag detections</h2>
 <p>First, determine which project tags have detections. There are several reasons why deployed tags might not be detected, including:</p>
 <ol style="list-style-type: decimal">
@@ -623,10 +630,14 @@ We’ll fix this here as sometimes if there is missing metadata (ie. a missing r
 <span id="cb114-3"><a href="dataCleaning.html#cb114-3"></a><span class="st">  </span><span class="kw">select</span>(recvLat, recvLon, recvDeployName, recvDeployID, recv, </span>
 <span id="cb114-4"><a href="dataCleaning.html#cb114-4"></a>         recvProjID, recvProjName) <span class="op">%&gt;%</span></span>
 <span id="cb114-5"><a href="dataCleaning.html#cb114-5"></a><span class="st">  </span><span class="kw">distinct</span>()</span></code></pre></div>
-<pre><code>##   recvLat recvLon recvDeployName recvDeployID            recv recvProjID recvProjName
-## 1      NA      NA      NP mobile         3813       Lotek-280        176   SampleData
-## 2      NA      NA          NA:NA           NA SG-1415BBBK0382         NA         &lt;NA&gt;
-## 3      NA      NA          NA:NA           NA SG-2814BBBK0547         NA         &lt;NA&gt;</code></pre>
+<pre><code>##   recvLat recvLon recvDeployName recvDeployID            recv recvProjID
+## 1      NA      NA      NP mobile         3813       Lotek-280        176
+## 2      NA      NA          NA:NA           NA SG-1415BBBK0382         NA
+## 3      NA      NA          NA:NA           NA SG-2814BBBK0547         NA
+##   recvProjName
+## 1   SampleData
+## 2         &lt;NA&gt;
+## 3         &lt;NA&gt;</code></pre>
 <p><strong>Simplify the data for plotting</strong></p>
 <p>We can simplify the data by summarizing by the <code>runID</code>. If you want to summarize at a finer/coarser scale, you can also create other groups. The simplest alternative is a rounded timestamp variable; for example by using <code>mutate(ts.h = plyr::round_any(ts, 3600)</code>. Other options are to just use date (e.g <code>date = as_date(ts)</code>).</p>
 <p>Here is an advanced example creating a function so we can re-use this simplification later.</p>
@@ -706,7 +717,7 @@ For example, the following code shows the maximum run length at all sites by mon
 ##  8 Comeau (Marshalltown)    NA    NA    NA     4    NA
 ##  9 CONY                     NA    NA    NA    NA     7
 ## 10 D&#39;Estimauville           NA    NA    NA    40    NA
-## # … with 32 more rows</code></pre>
+## # ... with 32 more rows</code></pre>
 <p>Alternatively, you can produce a list of sites where the maximum run length of detections was never greater than (say) 4, which may sometimes (but not always!) indicate they are simply false detections.</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="dataCleaning.html#cb125-1"></a>df.alltags.sub <span class="op">%&gt;%</span></span>
 <span id="cb125-2"><a href="dataCleaning.html#cb125-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(ts)) <span class="op">%&gt;%</span></span>
@@ -754,20 +765,27 @@ For example, the following code shows the maximum run length at all sites by mon
 <p><strong>Are any of your tags associated with ambiguous detections?</strong></p>
 <p>The <code>clarify()</code> function in the <code>motus</code> R package provides a summary of ambiguities in the detections data. Each <code>ambigID</code> refers to a selection of detections that could belong to one or more (up to 6) <code>motusTagID</code>s, which are listed in the <code>id1</code> to <code>id6</code> columns:</p>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="dataCleaning.html#cb131-1"></a><span class="kw">clarify</span>(sql.motus)</span></code></pre></div>
-<pre><code>##   ambigID numHits   id1                              fullID1   id2                              fullID2   id3                         fullID3 id4 fullID4 id5 fullID5
-## 1     -56    5734 22867 SampleData#272.1:5.3@166.38(M.22867) 23316   SampleData#272:5.3@166.38(M.23316)    NA                            &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;
-## 2    -106     279 17021        Selva#172:6.1@166.38(M.17021) 17357   SampleData#172:6.1@166.38(M.17357)    NA                            &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;
-## 3    -114      86 22897 SampleData#303.1:5.3@166.38(M.22897) 24298      NEONICS#303:5.3@166.38(M.24298)    NA                            &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;
-## 4    -134   22749 22905   SampleData#301:5.3@166.38(M.22905) 23319 SampleData#301.1:5.3@166.38(M.23319)    NA                            &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;
-## 5    -171    2074 22778   RBrownAMWO#308:5.3@166.38(M.22778) 22902 SampleData#308.1:5.3@166.38(M.22902) 24303 NEONICS#308:5.3@166.38(M.24303)  NA    &lt;NA&gt;  NA    &lt;NA&gt;
-## 6    -337       4 10811        Niles#152:6.1@166.38(M.10811) 16011   SampleData#152:6.1@166.38(M.16011)    NA                            &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;
-##   id6 fullID6 motusTagID tsStart tsEnd
-## 1  NA    &lt;NA&gt;         NA      NA    NA
-## 2  NA    &lt;NA&gt;         NA      NA    NA
-## 3  NA    &lt;NA&gt;         NA      NA    NA
-## 4  NA    &lt;NA&gt;         NA      NA    NA
-## 5  NA    &lt;NA&gt;         NA      NA    NA
-## 6  NA    &lt;NA&gt;         NA      NA    NA</code></pre>
+<pre><code>##   ambigID numHits   id1                              fullID1   id2
+## 1     -56    5734 22867 SampleData#272.1:5.3@166.38(M.22867) 23316
+## 2    -106     279 17021        Selva#172:6.1@166.38(M.17021) 17357
+## 3    -114      86 22897 SampleData#303.1:5.3@166.38(M.22897) 24298
+## 4    -134   22749 22905   SampleData#301:5.3@166.38(M.22905) 23319
+## 5    -171    2074 22778   RBrownAMWO#308:5.3@166.38(M.22778) 22902
+## 6    -337       4 10811        Niles#152:6.1@166.38(M.10811) 16011
+##                                fullID2   id3                         fullID3
+## 1   SampleData#272:5.3@166.38(M.23316)    NA                            &lt;NA&gt;
+## 2   SampleData#172:6.1@166.38(M.17357)    NA                            &lt;NA&gt;
+## 3      NEONICS#303:5.3@166.38(M.24298)    NA                            &lt;NA&gt;
+## 4 SampleData#301.1:5.3@166.38(M.23319)    NA                            &lt;NA&gt;
+## 5 SampleData#308.1:5.3@166.38(M.22902) 24303 NEONICS#308:5.3@166.38(M.24303)
+## 6   SampleData#152:6.1@166.38(M.16011)    NA                            &lt;NA&gt;
+##   id4 fullID4 id5 fullID5 id6 fullID6 motusTagID tsStart tsEnd
+## 1  NA    &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;         NA      NA    NA
+## 2  NA    &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;         NA      NA    NA
+## 3  NA    &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;         NA      NA    NA
+## 4  NA    &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;         NA      NA    NA
+## 5  NA    &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;         NA      NA    NA
+## 6  NA    &lt;NA&gt;  NA    &lt;NA&gt;  NA    &lt;NA&gt;         NA      NA    NA</code></pre>
 <p>We can see that there are six tags with ambiguous detections within this data set. Detections associated with five of the six <code>ambigID</code>s could belong to one of two tags, and detections associated with one <code>ambigID</code> (<code>-171</code>) could belong to one of three tags.
 The <code>fullID</code> fields list the project names associated with the duplicate tags (e.g., “SampleData”, “Selva”, “Niles”), along with features of the tags (manufacturer tag ID, burst, and transmit frequency).</p>
 <p>Let’s get a data frame of these, and do some plots to see where there may be issues.</p>
@@ -830,9 +848,12 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb142-2"><a href="dataCleaning.html#cb142-2"></a><span class="st">  </span><span class="kw">filter</span>(ambigID <span class="op">==</span><span class="st"> </span><span class="dv">-134</span>) <span class="op">%&gt;%</span></span>
 <span id="cb142-3"><a href="dataCleaning.html#cb142-3"></a><span class="st">  </span><span class="kw">count</span>(motusTagID, tagDeployStart, tagDeployEnd, </span>
 <span id="cb142-4"><a href="dataCleaning.html#cb142-4"></a>           tagDepLat, tagDepLon, <span class="kw">month</span>(ts))</span></code></pre></div>
-<pre><code>##   motusTagID      tagDeployStart        tagDeployEnd tagDepLat tagDepLon month(ts)     n
-## 1      22905 2016-10-01 16:00:00 2017-06-12 16:00:00  50.19278 -63.74528        10 22279
-## 2      23319 2016-10-15 16:00:00 2017-06-26 16:00:00  50.19278 -63.74528        10 22279</code></pre>
+<pre><code>##   motusTagID      tagDeployStart        tagDeployEnd tagDepLat tagDepLon
+## 1      22905 2016-10-01 16:00:00 2017-06-12 16:00:00  50.19278 -63.74528
+## 2      23319 2016-10-15 16:00:00 2017-06-26 16:00:00  50.19278 -63.74528
+##   month(ts)     n
+## 1        10 22279
+## 2        10 22279</code></pre>
 <p>Here we have a similar situation, but one that is a bit more complex. Two identical tags were deployed at the same location, shortly after one another. Let’s examine a simple plot.</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="dataCleaning.html#cb144-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="kw">filter</span>(df.alltags.sub, </span>
 <span id="cb144-2"><a href="dataCleaning.html#cb144-2"></a>                     motusTagID <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">22905</span>, <span class="dv">23319</span>)),</span>
@@ -863,10 +884,14 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb146-7"><a href="dataCleaning.html#cb146-7"></a><span class="st">  </span><span class="kw">arrange</span>(start) <span class="op">%&gt;%</span></span>
 <span id="cb146-8"><a href="dataCleaning.html#cb146-8"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
 <span id="cb146-9"><a href="dataCleaning.html#cb146-9"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   motusTagID tagProjID               start                 end      lat       lon               species
-## 1      22902       176 2016-10-01 16:00:00 2017-06-12 16:00:00 50.19278 -63.74528              Red Knot
-## 2      22778        82 2016-10-21 00:00:00 2018-09-09 00:00:00 45.13535 -67.29323     American Woodcock
-## 3      24303       146 2017-05-10 22:30:59 2017-06-30 22:30:59 42.60600 -80.46900 White-crowned Sparrow</code></pre>
+<pre><code>##   motusTagID tagProjID               start                 end      lat
+## 1      22902       176 2016-10-01 16:00:00 2017-06-12 16:00:00 50.19278
+## 2      22778        82 2016-10-21 00:00:00 2018-09-09 00:00:00 45.13535
+## 3      24303       146 2017-05-10 22:30:59 2017-06-30 22:30:59 42.60600
+##         lon               species
+## 1 -63.74528              Red Knot
+## 2 -67.29323     American Woodcock
+## 3 -80.46900 White-crowned Sparrow</code></pre>
 <p>And plot the ambiguous detections.</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="dataCleaning.html#cb148-1"></a>df.ambig<span class="fl">.171</span> &lt;-<span class="st"> </span><span class="kw">filter</span>(df.alltags.sub, ambigID <span class="op">==</span><span class="st"> </span><span class="dv">-171</span>)</span>
 <span id="cb148-2"><a href="dataCleaning.html#cb148-2"></a></span>
@@ -898,9 +923,12 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb151-7"><a href="dataCleaning.html#cb151-7"></a><span class="st">  </span><span class="kw">arrange</span>(start) <span class="op">%&gt;%</span></span>
 <span id="cb151-8"><a href="dataCleaning.html#cb151-8"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
 <span id="cb151-9"><a href="dataCleaning.html#cb151-9"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   motusTagID tagProjID               start                 end      lat       lon               species
-## 1      22897       176 2016-10-01 16:00:00 2017-06-12 16:00:00 50.19278 -63.74528              Red Knot
-## 2      24298       146 2017-05-10 03:00:00 2017-06-30 03:00:00 42.60690 -80.46900 White-crowned Sparrow</code></pre>
+<pre><code>##   motusTagID tagProjID               start                 end      lat
+## 1      22897       176 2016-10-01 16:00:00 2017-06-12 16:00:00 50.19278
+## 2      24298       146 2017-05-10 03:00:00 2017-06-30 03:00:00 42.60690
+##         lon               species
+## 1 -63.74528              Red Knot
+## 2 -80.46900 White-crowned Sparrow</code></pre>
 <p>We again subset these and plot them. An initial plot suggested that all of the detections are of a migratory flight, so we construct a somewhat different plot from the one above, that emphasizes this behaviour better.</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="dataCleaning.html#cb153-1"></a>df.ambig<span class="fl">.114</span> &lt;-<span class="st"> </span>df.alltags.sub <span class="op">%&gt;%</span></span>
 <span id="cb153-2"><a href="dataCleaning.html#cb153-2"></a><span class="st">  </span><span class="kw">filter</span>(ambigID <span class="op">==</span><span class="st"> </span><span class="dv">-114</span>) <span class="op">%&gt;%</span></span>
@@ -926,9 +954,12 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb155-7"><a href="dataCleaning.html#cb155-7"></a><span class="st">  </span><span class="kw">arrange</span>(start) <span class="op">%&gt;%</span></span>
 <span id="cb155-8"><a href="dataCleaning.html#cb155-8"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
 <span id="cb155-9"><a href="dataCleaning.html#cb155-9"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   motusTagID tagProjID               start                 end      lat       lon                species
-## 1      17021        57 2015-04-30 05:00:00 2015-09-14 05:00:00 11.12265 -74.08735    Gray-cheeked Thrush
-## 2      17357       176 2015-08-11 07:20:00 2015-12-26 07:20:00 51.48390 -80.45000 White-rumped Sandpiper</code></pre>
+<pre><code>##   motusTagID tagProjID               start                 end      lat
+## 1      17021        57 2015-04-30 05:00:00 2015-09-14 05:00:00 11.12265
+## 2      17357       176 2015-08-11 07:20:00 2015-12-26 07:20:00 51.48390
+##         lon                species
+## 1 -74.08735    Gray-cheeked Thrush
+## 2 -80.45000 White-rumped Sandpiper</code></pre>
 <p>We plot the ambiguous detections to examine the period of overlap.</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="dataCleaning.html#cb157-1"></a>df.ambig<span class="fl">.106</span> &lt;-<span class="st"> </span><span class="kw">filter</span>(df.alltags.sub, ambigID <span class="op">==</span><span class="st"> </span><span class="dv">-106</span>)</span>
 <span id="cb157-2"><a href="dataCleaning.html#cb157-2"></a></span>
@@ -951,9 +982,9 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb158-8"><a href="dataCleaning.html#cb158-8"></a>         <span class="dt">date =</span> ts.x, <span class="st">`</span><span class="dt">rate(m/s)</span><span class="st">`</span> =<span class="st"> </span>rate, </span>
 <span id="cb158-9"><a href="dataCleaning.html#cb158-9"></a>         dist, <span class="dt">total.time =</span> total.time, bearing)</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
-##   start                 end           date                `rate(m/s)`     dist total.time bearing
-##   &lt;chr&gt;                 &lt;chr&gt;         &lt;dttm&gt;                    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-## 1 Netitishi_51.3, -80.1 MDR_44, -68.2 2015-09-02 04:18:42        17.1 1211567.      70879    128.</code></pre>
+##   start       end      date                `rate(m/s)`   dist total.time bearing
+##   &lt;chr&gt;       &lt;chr&gt;    &lt;dttm&gt;                    &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Netitishi_~ MDR_44,~ 2015-09-02 04:18:42        17.1 1.21e6      70879    128.</code></pre>
 <p>These detections are &gt;1200 km distant from one another, but the flight speed (17 m/s) is consistent with a white-rumped Sandpiper. Given that the Gray-cheeked Thrush tag was near the end of its expected lifetime, we can reasonably claim these detections for our project, and remove the ambiguous detections associated with <code>motusTagID</code> 17021.</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="dataCleaning.html#cb160-1"></a>df.block<span class="fl">.6</span> &lt;-<span class="st"> </span>df.alltags.sub <span class="op">%&gt;%</span></span>
 <span id="cb160-2"><a href="dataCleaning.html#cb160-2"></a><span class="st">  </span><span class="kw">filter</span>(ambigID <span class="op">==</span><span class="st"> </span><span class="dv">-106</span>, motusTagID <span class="op">==</span><span class="st"> </span><span class="dv">17021</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -970,9 +1001,12 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb161-7"><a href="dataCleaning.html#cb161-7"></a><span class="st">  </span><span class="kw">arrange</span>(start) <span class="op">%&gt;%</span></span>
 <span id="cb161-8"><a href="dataCleaning.html#cb161-8"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
 <span id="cb161-9"><a href="dataCleaning.html#cb161-9"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   motusTagID tagProjID               start                 end      lat       lon            species
-## 1      22867       176 2016-09-06 15:35:00 2017-05-18 15:35:00 51.79861 -80.69139 Pectoral Sandpiper
-## 2      23316       176 2016-10-02 16:00:00 2017-06-13 16:00:00 50.19278 -63.74528           Red Knot</code></pre>
+<pre><code>##   motusTagID tagProjID               start                 end      lat
+## 1      22867       176 2016-09-06 15:35:00 2017-05-18 15:35:00 51.79861
+## 2      23316       176 2016-10-02 16:00:00 2017-06-13 16:00:00 50.19278
+##         lon            species
+## 1 -80.69139 Pectoral Sandpiper
+## 2 -63.74528           Red Knot</code></pre>
 <p>Tag 23316 was deployed by the James Bay Shorebird Project (sample project) about three weeks after tag 22867, which was deployed from a location far to the west.</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="dataCleaning.html#cb163-1"></a>df.ambig<span class="fl">.56</span> &lt;-<span class="st"> </span>df.alltags.sub <span class="op">%&gt;%</span></span>
 <span id="cb163-2"><a href="dataCleaning.html#cb163-2"></a><span class="st">  </span><span class="kw">filter</span>(ambigID <span class="op">==</span><span class="st"> </span><span class="dv">-56</span>) <span class="op">%&gt;%</span></span>
@@ -1011,10 +1045,10 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb165-10"><a href="dataCleaning.html#cb165-10"></a>         <span class="dt">date =</span> ts.x, <span class="st">`</span><span class="dt">rate(m/s)</span><span class="st">`</span> =<span class="st"> </span>rate, </span>
 <span id="cb165-11"><a href="dataCleaning.html#cb165-11"></a>         dist, <span class="dt">total.time =</span> total.time, bearing)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 7
-##   start                  end                    date                `rate(m/s)`     dist total.time bearing
-##   &lt;chr&gt;                  &lt;chr&gt;                  &lt;dttm&gt;                    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-## 1 Piskwamish_51.7, -80.6 Washkaugou_51.2, -79.8 2016-10-09 22:49:59        20.3   76280.       3767    137.
-## 2 Washkaugou_51.2, -79.8 SHNJ_40.5, -74         2016-10-10 00:00:42        24.3 1270877.      52386    157.</code></pre>
+##   start      end       date                `rate(m/s)`   dist total.time bearing
+##   &lt;chr&gt;      &lt;chr&gt;     &lt;dttm&gt;                    &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Piskwamis~ Washkaug~ 2016-10-09 22:49:59        20.3 7.63e4       3767    137.
+## 2 Washkaugo~ SHNJ_40.~ 2016-10-10 00:00:42        24.3 1.27e6      52386    157.</code></pre>
 <p>The bird made a 14.5 hour flight between Washkaugou and SHNJ at a rate of 24 m/s, which is plausible. The researchers involved may have other data to support or refute the inference (e.g. an actual sighting of the Red Knot still in Niapiskau after this flight was recorded) but it seems likely that while one tag remained at sites around longitude -65, another tag made the above migratory flights. We can make another more detailed plot of signal strength to examine these potential migratory flights more closely:</p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="dataCleaning.html#cb167-1"></a>df.<span class="fl">56.</span>tmp &lt;-<span class="st"> </span><span class="kw">filter</span>(df.alltags.sub, ambigID <span class="op">==</span><span class="st"> </span><span class="dv">-56</span>, recvLon <span class="op">&lt;</span><span class="st"> </span><span class="dv">-70</span>)</span>
 <span id="cb167-2"><a href="dataCleaning.html#cb167-2"></a></span>
@@ -1079,8 +1113,9 @@ We can then inspect the overall plots (or portions of them) to determine if we c
 <span id="cb172-7"><a href="dataCleaning.html#cb172-7"></a><span class="co"># create a new filter with name filtAmbigFalsePos and populate it with df.block.all</span></span>
 <span id="cb172-8"><a href="dataCleaning.html#cb172-8"></a>tbl.filter &lt;-<span class="st"> </span><span class="kw">writeRunsFilter</span>(sql.motus, <span class="st">&quot;filtAmbigFalsePos&quot;</span>, </span>
 <span id="cb172-9"><a href="dataCleaning.html#cb172-9"></a>                              <span class="dt">df =</span> df.block.all, <span class="dt">delete =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## Warning in createRunsFilter(src, filterName, motusProjID, update = FALSE): Warning: filter already exists. Use createRunsFilter function with update=TRUE if you want
-## to update the properties (e.g. name) of the existing filter.</code></pre>
+<pre><code>## Warning in createRunsFilter(src, filterName, motusProjID, update = FALSE):
+## Warning: filter already exists. Use createRunsFilter function with update=TRUE
+## if you want to update the properties (e.g. name) of the existing filter.</code></pre>
 <pre><code>## Filter records saved</code></pre>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="dataCleaning.html#cb175-1"></a><span class="co"># obtain a table object where the filtered records from tbl.filter.1 have been removed</span></span>
 <span id="cb175-2"><a href="dataCleaning.html#cb175-2"></a>tbl.alltags.sub &lt;-<span class="st"> </span><span class="kw">anti_join</span>(tbl.alltags, tbl.filter, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;runID&quot;</span>, <span class="st">&quot;motusTagID&quot;</span>))</span></code></pre></div>

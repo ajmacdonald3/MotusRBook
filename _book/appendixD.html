@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>D Appendix - motus - Data filtering functions | Motus R Book</title>
   <meta name="description" content="D Appendix - motus - Data filtering functions | Motus R Book" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="D Appendix - motus - Data filtering functions | Motus R Book" />
   <meta property="og:type" content="book" />
@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -201,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="dataCleaning.html"><a href="dataCleaning.html"><i class="fa fa-check"></i><b>5</b> Data Cleaning</a><ul>
 <li class="chapter" data-level="5.1" data-path="dataCleaning.html"><a href="dataCleaning.html#loadDetectionsCleaning"><i class="fa fa-check"></i><b>5.1</b> Load required packages</a></li>
 <li class="chapter" data-level="5.2" data-path="dataCleaning.html"><a href="dataCleaning.html#load-detections-data"><i class="fa fa-check"></i><b>5.2</b> Load detections data</a></li>
-<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assess-tag-detections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
+<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assessTagDetections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
 <li class="chapter" data-level="5.4" data-path="dataCleaning.html"><a href="dataCleaning.html#preliminary-filtering"><i class="fa fa-check"></i><b>5.4</b> Preliminary filtering</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="dataCleaning.html"><a href="dataCleaning.html#understanding-the-motusfilter"><i class="fa fa-check"></i><b>5.4.1</b> Understanding the <code>motusFilter</code></a></li>
 <li class="chapter" data-level="5.4.2" data-path="dataCleaning.html"><a href="dataCleaning.html#how-the-motusfilter-is-generated"><i class="fa fa-check"></i><b>5.4.2</b> How the <code>motusFilter</code> is generated</a></li>
@@ -245,6 +246,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="vanishingBearings.html"><a href="vanishingBearings.html#vanishingLitCited"><i class="fa fa-check"></i><b>7.3</b> Literature Cited</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="advancedModelling.html"><a href="advancedModelling.html"><i class="fa fa-check"></i><b>8</b> Advanced modelling and analysis</a></li>
+<li class="chapter" data-level="9" data-path="falsePositives.html"><a href="falsePositives.html"><i class="fa fa-check"></i><b>9</b> A tool to identify probable false positive detections</a><ul>
+<li class="chapter" data-level="9.1" data-path="falsePositives.html"><a href="falsePositives.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="falsePositives.html"><a href="falsePositives.html#step-1-classification-of-detections"><i class="fa fa-check"></i><b>9.2</b> Step 1 – Classification of detections</a></li>
+<li class="chapter" data-level="9.3" data-path="falsePositives.html"><a href="falsePositives.html#step-2-identification-of-potential-diagnostic-parameters"><i class="fa fa-check"></i><b>9.3</b> Step 2 – Identification of potential diagnostic parameters</a></li>
+<li class="chapter" data-level="9.4" data-path="falsePositives.html"><a href="falsePositives.html#step-3-prediction-of-the-probability-of-being-a-false-positive"><i class="fa fa-check"></i><b>9.4</b> Step 3 – Prediction of the probability of being a false positive</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Appendix - <code>alltags</code> and <code>alltagsGPS</code> structure</a></li>
 <li class="chapter" data-level="B" data-path="appendixB.html"><a href="appendixB.html"><i class="fa fa-check"></i><b>B</b> Appendix - Troubleshooting</a><ul>
@@ -415,7 +422,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="example-16" class="section level2">
 <h2><span class="header-section-number">D.3</span> Example</h2>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="appendixD.html#cb260-1"></a>filt.df &lt;-<span class="st"> </span><span class="kw">listRunsFilters</span>(<span class="dt">src =</span> sql.motus)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="appendixD.html#cb279-1"></a>filt.df &lt;-<span class="st"> </span><span class="kw">listRunsFilters</span>(<span class="dt">src =</span> sql.motus)</span></code></pre></div>
 </div>
 <div id="createRunsFilter" class="section level2">
 <h2><span class="header-section-number">D.4</span> <code>createRunsFilter</code></h2>
@@ -434,16 +441,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-17" class="section level3">
 <h3><span class="header-section-number">D.4.3</span> Example</h3>
 <p>Create a new filter called “myfilter” for the sql.motus database which is not attached to a specific project:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="appendixD.html#cb261-1"></a><span class="kw">createRunsFilter</span>(sql.motus, <span class="st">&quot;myfilter&quot;</span>)</span>
-<span id="cb261-2"><a href="appendixD.html#cb261-2"></a></span>
-<span id="cb261-3"><a href="appendixD.html#cb261-3"></a><span class="co"># OR add assignment to project</span></span>
-<span id="cb261-4"><a href="appendixD.html#cb261-4"></a></span>
-<span id="cb261-5"><a href="appendixD.html#cb261-5"></a><span class="kw">createRunsFilter</span>(sql.motus, <span class="st">&quot;myfilter&quot;</span>, <span class="dt">motusProjID =</span> <span class="dv">176</span>)</span>
-<span id="cb261-6"><a href="appendixD.html#cb261-6"></a></span>
-<span id="cb261-7"><a href="appendixD.html#cb261-7"></a><span class="co"># OR add project and description, possibly updating any previous version called myfilter.</span></span>
-<span id="cb261-8"><a href="appendixD.html#cb261-8"></a></span>
-<span id="cb261-9"><a href="appendixD.html#cb261-9"></a><span class="kw">createRunsFilter</span>(sql.motus, <span class="st">&quot;myfilter&quot;</span>, <span class="dt">motusProjID =</span> <span class="dv">176</span>, </span>
-<span id="cb261-10"><a href="appendixD.html#cb261-10"></a>                 <span class="dt">descr =</span> <span class="st">&quot;assign probability of 0 to false positives&quot;</span>, <span class="dt">update =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="appendixD.html#cb280-1"></a><span class="kw">createRunsFilter</span>(sql.motus, <span class="st">&quot;myfilter&quot;</span>)</span>
+<span id="cb280-2"><a href="appendixD.html#cb280-2"></a></span>
+<span id="cb280-3"><a href="appendixD.html#cb280-3"></a><span class="co"># OR add assignment to project</span></span>
+<span id="cb280-4"><a href="appendixD.html#cb280-4"></a></span>
+<span id="cb280-5"><a href="appendixD.html#cb280-5"></a><span class="kw">createRunsFilter</span>(sql.motus, <span class="st">&quot;myfilter&quot;</span>, <span class="dt">motusProjID =</span> <span class="dv">176</span>)</span>
+<span id="cb280-6"><a href="appendixD.html#cb280-6"></a></span>
+<span id="cb280-7"><a href="appendixD.html#cb280-7"></a><span class="co"># OR add project and description, possibly updating any previous version called myfilter.</span></span>
+<span id="cb280-8"><a href="appendixD.html#cb280-8"></a></span>
+<span id="cb280-9"><a href="appendixD.html#cb280-9"></a><span class="kw">createRunsFilter</span>(sql.motus, <span class="st">&quot;myfilter&quot;</span>, <span class="dt">motusProjID =</span> <span class="dv">176</span>, </span>
+<span id="cb280-10"><a href="appendixD.html#cb280-10"></a>                 <span class="dt">descr =</span> <span class="st">&quot;assign probability of 0 to false positives&quot;</span>, <span class="dt">update =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="getRunsFilters" class="section level2">
@@ -460,18 +467,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="example-18" class="section level3">
 <h3><span class="header-section-number">D.5.3</span> Example</h3>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="appendixD.html#cb262-1"></a>tbl.filt &lt;-<span class="st"> </span><span class="kw">getRunsFilters</span>(<span class="dt">src =</span> sql.motus, <span class="dt">filterName =</span> <span class="st">&quot;myfilter&quot;</span>)</span>
-<span id="cb262-2"><a href="appendixD.html#cb262-2"></a>tbl.filt2 &lt;-<span class="st"> </span><span class="kw">getRunsFilters</span>(sql.motus, <span class="st">&quot;myfilter2&quot;</span>)</span>
-<span id="cb262-3"><a href="appendixD.html#cb262-3"></a></span>
-<span id="cb262-4"><a href="appendixD.html#cb262-4"></a><span class="co"># filter records from df that are in tbl.filt</span></span>
-<span id="cb262-5"><a href="appendixD.html#cb262-5"></a>df &lt;-<span class="st"> </span><span class="kw">left_join</span>(df, tbl.filt, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;runID&quot;</span>, <span class="st">&quot;motusTagID&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb262-6"><a href="appendixD.html#cb262-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probability =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(probability), <span class="dv">1</span>, probability)) <span class="op">%&gt;%</span></span>
-<span id="cb262-7"><a href="appendixD.html#cb262-7"></a><span class="st">  </span><span class="kw">filter</span>(probability <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb262-8"><a href="appendixD.html#cb262-8"></a></span>
-<span id="cb262-9"><a href="appendixD.html#cb262-9"></a><span class="co"># you can apply a second filter, tbl.filt2, to the result of the previous filter</span></span>
-<span id="cb262-10"><a href="appendixD.html#cb262-10"></a>df &lt;-<span class="st"> </span><span class="kw">left_join</span>(df, tbl.filt2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;runID&quot;</span>, <span class="st">&quot;motusTagID&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb262-11"><a href="appendixD.html#cb262-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probability =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(probability), <span class="dv">1</span>, probability)) <span class="op">%&gt;%</span></span>
-<span id="cb262-12"><a href="appendixD.html#cb262-12"></a><span class="st">  </span><span class="kw">filter</span>(probability <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="appendixD.html#cb281-1"></a>tbl.filt &lt;-<span class="st"> </span><span class="kw">getRunsFilters</span>(<span class="dt">src =</span> sql.motus, <span class="dt">filterName =</span> <span class="st">&quot;myfilter&quot;</span>)</span>
+<span id="cb281-2"><a href="appendixD.html#cb281-2"></a>tbl.filt2 &lt;-<span class="st"> </span><span class="kw">getRunsFilters</span>(sql.motus, <span class="st">&quot;myfilter2&quot;</span>)</span>
+<span id="cb281-3"><a href="appendixD.html#cb281-3"></a></span>
+<span id="cb281-4"><a href="appendixD.html#cb281-4"></a><span class="co"># filter records from df that are in tbl.filt</span></span>
+<span id="cb281-5"><a href="appendixD.html#cb281-5"></a>df &lt;-<span class="st"> </span><span class="kw">left_join</span>(df, tbl.filt, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;runID&quot;</span>, <span class="st">&quot;motusTagID&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb281-6"><a href="appendixD.html#cb281-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probability =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(probability), <span class="dv">1</span>, probability)) <span class="op">%&gt;%</span></span>
+<span id="cb281-7"><a href="appendixD.html#cb281-7"></a><span class="st">  </span><span class="kw">filter</span>(probability <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb281-8"><a href="appendixD.html#cb281-8"></a></span>
+<span id="cb281-9"><a href="appendixD.html#cb281-9"></a><span class="co"># you can apply a second filter, tbl.filt2, to the result of the previous filter</span></span>
+<span id="cb281-10"><a href="appendixD.html#cb281-10"></a>df &lt;-<span class="st"> </span><span class="kw">left_join</span>(df, tbl.filt2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;runID&quot;</span>, <span class="st">&quot;motusTagID&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb281-11"><a href="appendixD.html#cb281-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probability =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(probability), <span class="dv">1</span>, probability)) <span class="op">%&gt;%</span></span>
+<span id="cb281-12"><a href="appendixD.html#cb281-12"></a><span class="st">  </span><span class="kw">filter</span>(probability <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="writeRunsFilter" class="section level2">
@@ -491,18 +498,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="examples" class="section level3">
 <h3><span class="header-section-number">D.6.3</span> Examples</h3>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="appendixD.html#cb263-1"></a><span class="co"># write a dataframe containing filter records (runID, motusTagID and</span></span>
-<span id="cb263-2"><a href="appendixD.html#cb263-2"></a><span class="co"># probability) to “myfilter”</span></span>
-<span id="cb263-3"><a href="appendixD.html#cb263-3"></a><span class="kw">writeRunsFilter</span>(<span class="dt">src =</span> sql.motus, <span class="dt">filterName =</span> <span class="st">&quot;myfilter&quot;</span>, <span class="dt">df =</span> filter.df)</span>
-<span id="cb263-4"><a href="appendixD.html#cb263-4"></a></span>
-<span id="cb263-5"><a href="appendixD.html#cb263-5"></a><span class="co"># write a dataframe containing filter records (runID, motusTagID and</span></span>
-<span id="cb263-6"><a href="appendixD.html#cb263-6"></a><span class="co"># probability) to “myfilter”, overwriting a previous version entirely</span></span>
-<span id="cb263-7"><a href="appendixD.html#cb263-7"></a><span class="kw">writeRunsFilter</span>(<span class="dt">src =</span> sql.motus, <span class="dt">fileName =</span> <span class="st">&quot;myfilter&quot;</span>, <span class="dt">df =</span> filter.df, <span class="dt">delete =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb263-8"><a href="appendixD.html#cb263-8"></a></span>
-<span id="cb263-9"><a href="appendixD.html#cb263-9"></a><span class="co"># write a dataframe containing filter records (runID, motusTagID and</span></span>
-<span id="cb263-10"><a href="appendixD.html#cb263-10"></a><span class="co"># probability) to &quot;myfilter&quot;, but only append new records, leaving previously</span></span>
-<span id="cb263-11"><a href="appendixD.html#cb263-11"></a><span class="co"># created ones intact</span></span>
-<span id="cb263-12"><a href="appendixD.html#cb263-12"></a><span class="kw">writeRunsFilter</span>(<span class="dt">src =</span> sql.motus, <span class="st">&quot;myfilter&quot;</span>, <span class="dt">df =</span> filter.df, <span class="dt">overwrite =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="appendixD.html#cb282-1"></a><span class="co"># write a dataframe containing filter records (runID, motusTagID and</span></span>
+<span id="cb282-2"><a href="appendixD.html#cb282-2"></a><span class="co"># probability) to “myfilter”</span></span>
+<span id="cb282-3"><a href="appendixD.html#cb282-3"></a><span class="kw">writeRunsFilter</span>(<span class="dt">src =</span> sql.motus, <span class="dt">filterName =</span> <span class="st">&quot;myfilter&quot;</span>, <span class="dt">df =</span> filter.df)</span>
+<span id="cb282-4"><a href="appendixD.html#cb282-4"></a></span>
+<span id="cb282-5"><a href="appendixD.html#cb282-5"></a><span class="co"># write a dataframe containing filter records (runID, motusTagID and</span></span>
+<span id="cb282-6"><a href="appendixD.html#cb282-6"></a><span class="co"># probability) to “myfilter”, overwriting a previous version entirely</span></span>
+<span id="cb282-7"><a href="appendixD.html#cb282-7"></a><span class="kw">writeRunsFilter</span>(<span class="dt">src =</span> sql.motus, <span class="dt">fileName =</span> <span class="st">&quot;myfilter&quot;</span>, <span class="dt">df =</span> filter.df, <span class="dt">delete =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb282-8"><a href="appendixD.html#cb282-8"></a></span>
+<span id="cb282-9"><a href="appendixD.html#cb282-9"></a><span class="co"># write a dataframe containing filter records (runID, motusTagID and</span></span>
+<span id="cb282-10"><a href="appendixD.html#cb282-10"></a><span class="co"># probability) to &quot;myfilter&quot;, but only append new records, leaving previously</span></span>
+<span id="cb282-11"><a href="appendixD.html#cb282-11"></a><span class="co"># created ones intact</span></span>
+<span id="cb282-12"><a href="appendixD.html#cb282-12"></a><span class="kw">writeRunsFilter</span>(<span class="dt">src =</span> sql.motus, <span class="st">&quot;myfilter&quot;</span>, <span class="dt">df =</span> filter.df, <span class="dt">overwrite =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 
 </div>
 </div>

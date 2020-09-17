@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Motus R Book</title>
   <meta name="description" content="Motus R Book" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20.3 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Motus R Book" />
   <meta property="og:type" content="book" />
@@ -49,6 +49,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -201,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="dataCleaning.html"><a href="dataCleaning.html"><i class="fa fa-check"></i><b>5</b> Data Cleaning</a><ul>
 <li class="chapter" data-level="5.1" data-path="dataCleaning.html"><a href="dataCleaning.html#loadDetectionsCleaning"><i class="fa fa-check"></i><b>5.1</b> Load required packages</a></li>
 <li class="chapter" data-level="5.2" data-path="dataCleaning.html"><a href="dataCleaning.html#load-detections-data"><i class="fa fa-check"></i><b>5.2</b> Load detections data</a></li>
-<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assess-tag-detections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
+<li class="chapter" data-level="5.3" data-path="dataCleaning.html"><a href="dataCleaning.html#assessTagDetections"><i class="fa fa-check"></i><b>5.3</b> Assess tag detections</a></li>
 <li class="chapter" data-level="5.4" data-path="dataCleaning.html"><a href="dataCleaning.html#preliminary-filtering"><i class="fa fa-check"></i><b>5.4</b> Preliminary filtering</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="dataCleaning.html"><a href="dataCleaning.html#understanding-the-motusfilter"><i class="fa fa-check"></i><b>5.4.1</b> Understanding the <code>motusFilter</code></a></li>
 <li class="chapter" data-level="5.4.2" data-path="dataCleaning.html"><a href="dataCleaning.html#how-the-motusfilter-is-generated"><i class="fa fa-check"></i><b>5.4.2</b> How the <code>motusFilter</code> is generated</a></li>
@@ -245,6 +246,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="vanishingBearings.html"><a href="vanishingBearings.html#vanishingLitCited"><i class="fa fa-check"></i><b>7.3</b> Literature Cited</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="advancedModelling.html"><a href="advancedModelling.html"><i class="fa fa-check"></i><b>8</b> Advanced modelling and analysis</a></li>
+<li class="chapter" data-level="9" data-path="falsePositives.html"><a href="falsePositives.html"><i class="fa fa-check"></i><b>9</b> A tool to identify probable false positive detections</a><ul>
+<li class="chapter" data-level="9.1" data-path="falsePositives.html"><a href="falsePositives.html#introduction-1"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="falsePositives.html"><a href="falsePositives.html#step-1-classification-of-detections"><i class="fa fa-check"></i><b>9.2</b> Step 1 – Classification of detections</a></li>
+<li class="chapter" data-level="9.3" data-path="falsePositives.html"><a href="falsePositives.html#step-2-identification-of-potential-diagnostic-parameters"><i class="fa fa-check"></i><b>9.3</b> Step 2 – Identification of potential diagnostic parameters</a></li>
+<li class="chapter" data-level="9.4" data-path="falsePositives.html"><a href="falsePositives.html#step-3-prediction-of-the-probability-of-being-a-false-positive"><i class="fa fa-check"></i><b>9.4</b> Step 3 – Prediction of the probability of being a false positive</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="appendixA.html"><a href="appendixA.html"><i class="fa fa-check"></i><b>A</b> Appendix - <code>alltags</code> and <code>alltagsGPS</code> structure</a></li>
 <li class="chapter" data-level="B" data-path="appendixB.html"><a href="appendixB.html"><i class="fa fa-check"></i><b>B</b> Appendix - Troubleshooting</a><ul>
@@ -407,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/BSC_Motus_Logo.png" width="700px" style="display: block; margin: auto;" /></p>
 <p>Our goal with this online ‘handbook’ is to show Motus (<a href="https://motus.org" class="uri">https://motus.org</a>) users how to use the R statistical programming language (<a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a>) to import tag detections data for a project or receiver; clean data and filter false positives; explore detections data through visualizations and summaries; transform the data, e.g., by determining time since sunrise/sunset or magnetic declination; and run various analytical procedures. We hope the contents will be of use, and if you have suggestions for additional examples, please let us know by emailing <a href="mailto:motus@birdscanada.org" class="email">motus@birdscanada.org</a>.</p>
 <p>The current version is largely based on the earlier work by Crewe et al. 2018 (available at <a href="https://motus.org/motusRBook/archives/MotusRBook2018-01.pdf" class="uri">https://motus.org/motusRBook/archives/MotusRBook2018-01.pdf</a>), and has since been supplemented by various people on the Motus team.</p>
-<p>Published July 2020 using <code>motus</code> v3.1.0</p>
+<p>Published September 2020 using <code>motus</code> v4.0.0</p>
 <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
 
 </div>
