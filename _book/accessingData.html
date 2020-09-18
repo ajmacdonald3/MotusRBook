@@ -437,7 +437,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong><code>pulseCounts</code></strong>: number of radio pulses measured on each antenna over 1 hour periods (<code>hourBin</code>).</li>
 <li><strong><code>recvDeps</code></strong>: metadata related to receiver deployments, e.g., deployment date, location, receiver characteristics.</li>
 <li><strong><code>recvs</code></strong>: metadata related to receiver serial number and associated Motus deviceID</li>
-<li><strong><code>runs</code></strong>: detection data associated with a run (continuous detections of a unique tag on a given receiver).</li>
+<li><strong><code>runs</code></strong>: detection data associated with a run (continuous detections of a unique tag on a given antenna or node).</li>
 <li><strong><code>runsFilters</code></strong>: a list of runIDs associated with user created filters and assigned probabilities.<br />
 </li>
 <li><strong><code>species</code></strong>: metadata related to species, e.g., unique identifier, scientific name, common name.</li>
@@ -621,7 +621,7 @@ We access the tables using the <code>tbl()</code> function from the dplyr packag
 ##   .. .. ..@ loadable.extensions: logi TRUE
 ##   .. .. ..@ flags              : int 70
 ##   .. .. ..@ vfs                : chr &quot;&quot;
-##   .. .. ..@ ref                :&lt;environment: 0x000000001c3a1eb8&gt; 
+##   .. .. ..@ ref                :&lt;environment: 0x000000001c3b2310&gt; 
 ##   .. .. ..@ bigint             : chr &quot;integer64&quot;
 ##   ..$ disco: NULL
 ##   ..- attr(*, &quot;class&quot;)= chr [1:4] &quot;src_SQLiteConnection&quot; &quot;src_dbi&quot; &quot;src_sql&quot; &quot;src&quot;
